@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./styles/css/materialize.css">
+    <link rel="stylesheet" href="./styles/css/style.css">
+    <link rel="stylesheet" href="./styles/css/all.css">
+    <script src="./styles/js/materialize.js"></script>
+    <title>Cash It Here</title>
+</head>
+<body bgcolor="#f1f1f1">
+  <header>
+    <nav class="indigo">
+      <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="fa fa-bars"></i></a>
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo" style="margin-left: 20px"><span class="fa fa-store-alt" style="margin-right: 10px"></span>STORE DASHBOARD</a>
+        <div class="right" style="margin-right: 20px;">
+          <a href="#!" class="dropdown-trigger" data-target="user-dropdown"><i class="fa fa-user-circle"></i></a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- dropdown structure -->
+    <ul class="dropdown-content" id="user-dropdown">
+      <li><a href="#!">Settings <i class="fa fa-cog" style="font-size: 15px; margin-right: 0px;"></i></a></li>
+      <li class="divider" tabindex="-1"></li>
+      <li><a href="login.html" class="red-text">Logout <i class="fa fa-user-lock" style="font-size: 15px; margin-right: 0px;"></i></a></li>
+    </ul>
+    <ul id="slide-out" class="sidenav sidenav-fixed indigo darken-1">
+      <li class="active">
+        <a href="#" class="waves-effect" onclick="PageChange(0)">
+          <i class="fa fa-home fa-1x" style="font-size: 20px;"></i>
+           Dashboard version 1.0
+        </a>
+      </li>
+      <li>
+        <a href="#" class="waves-effect waves-light" onclick="PageChange(1)">
+          <i class="fa fa-database fa-1x" style="font-size: 20px;"></i>
+           Stock Barang
+        </a>
+      </li>
+      <li>
+        <a href="#" class="waves-effect waves-light" onclick="PageChange(2)">
+          <i class="fa fa-chart-bar fa-1x" style="font-size: 20px;"></i>
+           Statistik
+        </a>
+      </li>
+    </ul>
+  </header>
+
+  <main>
+    <div class="row">
+      <div id="main-card" class="col s12">
+        <div class="card">
+          <div class="card-content center-align">
+            <h4 class="blue-text">WELCOME TO DASHBOARD</h4>
+          </div>
+        </div>
+        <div class="card amber darken-2 col s4 hoverable">
+          <div class="card-header">
+            <h4>The Header</h4>
+          </div>
+          <div class="card-content">
+            <p>loerm ipsum</p>
+          </div>
+          <div class="card-action blue">
+            <p>This is the card action</p>
+          </div>
+        </div>
+      </div>
+      <div id="main-card" class="col s12 hidden">
+        <div class="card center-align">
+          <div class="card-content">
+            <p class="card-title">Daftar Stock Barang</p>
+            <table id="stock-table" class="responsive-table stripped centered highlight display">
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>Kode Barang</th>
+                  <th>Nama Barang</th>
+                  <th>Jumlah Stock</th>
+                  <th>Harga Satuan</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+            <div class="pagination-wrapper">
+              <ul class="pagination" style="margin-top: 50px;">
+              </ul>
+            </div>
+          </div>
+          <div class="card-action">
+            <p class="card-title">Tambah Barang</p>
+            <div class="row" style="margin-top: 0px;">
+              <form id="tambah-barang">
+                <div class="input-field col s2">
+                  <input type="text" id="kode-barang" required style="text-transform: uppercase">
+                  <label for="kode-barang">Kode</label>
+                </div>
+                <div class="input-field col s2">
+                  <input type="text" id="nama-barang" required>
+                  <label for="nama-barang">Nama Barang</label>
+                </div>
+                <div class="input-field col s2">
+                  <input type="number" id="jumlah" required>
+                  <label for="jumlah">Jumlah</label>
+                </div>
+                <div class="input-field col s2">
+                  <select id="kuantitas">
+                    <option value="biji">biji</option>
+                    <option value="lusin">lusin</option>
+                    <option value="rim">rim</option>
+                  </select>
+                </div>
+                <div class="input-field col s2">
+                  <input type="number" id="harga-satuan" required>
+                  <label for="harga-satuan">Harga Satuan</label>
+                </div>
+                <div class="input-field col s2">
+                  <button class="btn waves-effect waves-light" type="submit">tambah</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="main-card" class="col s12 hidden">
+        <div class="card">
+          <div class="card-content center-align">
+            <p class="card-title">Statistik Penjualan</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal" id="edit-modal">
+        <div class="modal-content">
+          <h4 class="center-align">Edit Barang</h4>
+          <div class="row">
+            <form id="edit-barang">
+              <div class="input-field col s2 edit-kode">
+                <input type="text" id="edit-kode" style="text-transform: uppercase;">
+                <label for="edit-kode">Kode Barang</label>
+              </div>
+              <div class="input-field col s3 edit-nama">
+                <input type="text" id="edit-nama">
+                <label for="edit-nama">Nama Barang</label>
+              </div>
+              <div class="input-field col s3 edit-jumlah">
+                <input type="text" id="edit-jumlah">
+                <label for="edit-jumlah">Jumlah Barang</label>
+              </div>
+              <div class="input-field col s2">
+                <select id="edit-kuantitas">
+                  <option value="biji">biji</option>
+                  <option value="lusin">lusin</option>
+                  <option value="rim">rim</option>
+                </select>
+              </div>
+              <div class="input-field col s2 edit harga">
+                <input type="text" id="edit-harga">
+                <label for="edit-harga">Harga Barang</label>
+              </div>
+              <div class="input-field col s12 center-align">
+                <button id="selesai-edit" class="btn waves-effect waves-light">SELESAI</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal" id="delete-modal">
+        <div class="modal-content">
+          <h4 class="center-align">Apakah anda yakin?</h4>
+          <div class="row center-align">
+            <div class="col s12">
+              <button id="Iya" class="modal-close btn white black-text waves-effect waves-light" type="submit" onclick="confirmDelete()">YA</button>
+              <button class="modal-close btn red waves-effect waves-light" type="submit">TIDAK</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+<script src="systemController/adminController.js"></script>
+</html>

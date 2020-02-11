@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="./styles/css/materialize.css">
+    <link rel="stylesheet" href="./styles/css/all.css">
+    <link rel="stylesheet" href="./styles/css/style.css">
+    <script src="./styles/js/materialize.js"></script>
+    <title>Cash It Here</title>
+</head>
+<body>
+    <nav></nav>
+    <div class="container col s12 center-align">
+    <div class="row">
+        <div class="col s12 m6">
+            <div class="card blue-grey darken-1 z-depth-3" style="margin-top: 30%">
+                <div class="card-content white-text">
+                    <span class="card-title center-align"><i class="fa fa-lock fa-2x" style="margin-right: 5px"></i>Login: </span>
+                    <form class="container">
+                        <div class="row">
+                            <div class="input-field">
+                                <input class="white-text validate" type="text" id="username">
+                                <label for="username">Username</label>
+                            </div>
+                            <div class="input-field">
+                                <label for="password">Password</label>
+                                <input class="white-text validate" type="password" id="password">
+                            </div>
+                            <button class="btn waves-effect waves-light" type="submit" id="login-btn">Login</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-action" hidden>
+                    <p class="white-text">*Pastikan anda memasukkan username dan password sesuai dengan saat pertama kali membuat user!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+<script>
+    require('./systemController/loginSystem.js');
+</script>
+</html>
