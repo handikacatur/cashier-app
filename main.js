@@ -4,7 +4,7 @@ const path = require('path');
 const fs = require('fs');
 
 const {app, BrowserWindow, Menu, ipcMain} = electron;
-require('electron-reload')(__dirname);
+// require('electron-reload')(__dirname);
 
 let mainWindow;
 const userDataJSON = './data/userData.json';

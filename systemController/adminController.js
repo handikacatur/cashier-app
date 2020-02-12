@@ -6,7 +6,7 @@ const tambah = document.querySelector('#tambah-barang');
 const edit = document.querySelector('#edit-barang');
 const stockTable = document.querySelector('#stock-table').getElementsByTagName('tbody')[0];
 const pagination = document.querySelector('.pagination');
-let errorMessage, color, dataBarangGlobal, index, deleteDecrement;
+let errorMessage, color, dataBarangGlobal, index, deleteDecrement = 10;
 
 const sidenav = document.querySelector('.sidenav');
 M.Sidenav.init(sidenav);
@@ -81,7 +81,13 @@ function confirmDelete(){
 
 function ChangeTable(i){
     let index;
-    i == pagination.children.length - 1 ? index = (i * 10) - 10 : index = i * 10;
+    if (i == pagination.children.length - 1){
+        index = (i * 10) - 10;
+    } else if (i == 0){
+        index = 0
+    } else {
+        index = i * 10;
+    }
     deleteDecrement = index - 10;
     let akhir = dataBarangGlobal.length;
     stockTable.innerHTML = ``;
@@ -107,7 +113,7 @@ function ChangeTable(i){
         }
     }
     if (i == 0){
-        CreateTable(index + 10, 10);
+        akhir%10 == 0 ? CreateTable(index + 10, 10) : CreateTable(akhir, akhir - (akhir - akhir%10));
     } else if (i == pagination.children.length - 2 || i == pagination.children.length - 1){
         akhir%10 == 0 ? CreateTable(index, 10) : CreateTable(akhir, akhir - (akhir - akhir%10));
     } else {
@@ -213,31 +219,54 @@ function CreatePagination(pagination){
 if (stockTable.getElementsByTagName('tr').length === 0){
     ipcRenderer.on('warehouse-data', (e, dataBarang) => {
         dataBarangGlobal = dataBarang;
-        for(let i = 0; i < 10; i++){
-            stockTable.innerHTML += `
-            <tr>
-                <td>${i + 1}</td>
-                <td>${dataBarang[i].kode}</td>
-                <td>${dataBarang[i].nama}</td>
-                <td>${dataBarang[i].jumlah + ' biji'}</td>
-                <td>${formatter.format(dataBarang[i].hargaSatuan)}</td>
-                <td>
-                    <a href="#edit-modal" class="action-buttons-edit modal-trigger" onclick="EditBarang(this.parentNode.parentNode.children[0].innerText - 1)">
-                        <i class="fa fa-pen-square" style="margin: 2px"></i>
-                    </a>
-                    <a id="delete" href="#delete-modal" class="action-buttons-trash modal-trigger" onclick="Delete(this.parentNode.parentNode.children[0].innerText - 1)">
-                        <i class="fa fa-trash" style="margin: 2px"></i>
-                    </a>
-                </td>
-            </tr>
-            `;
+        if (dataBarangGlobal.length%10 == 0 || dataBarangGlobal.length > 10){
+            for(let i = 0; i < 10; i++){
+                stockTable.innerHTML += `
+                <tr>
+                    <td>${i + 1}</td>
+                    <td>${dataBarang[i].kode}</td>
+                    <td>${dataBarang[i].nama}</td>
+                    <td>${dataBarang[i].jumlah + ' biji'}</td>
+                    <td>${formatter.format(dataBarang[i].hargaSatuan)}</td>
+                    <td>
+                        <a href="#edit-modal" class="action-buttons-edit modal-trigger" onclick="EditBarang(this.parentNode.parentNode.children[0].innerText - 1)">
+                            <i class="fa fa-pen-square" style="margin: 2px"></i>
+                        </a>
+                        <a id="delete" href="#delete-modal" class="action-buttons-trash modal-trigger" onclick="Delete(this.parentNode.parentNode.children[0].innerText - 1)">
+                            <i class="fa fa-trash" style="margin: 2px"></i>
+                        </a>
+                    </td>
+                </tr>
+                `;
+            }
+            CreatePagination(pagination);
+        } else {
+            for(let i = 0; i < dataBarangGlobal.length; i++){
+                stockTable.innerHTML += /* html */ `
+                <tr>
+                    <td>${i + 1}</td>
+                    <td>${dataBarang[i].kode}</td>
+                    <td>${dataBarang[i].nama}</td>
+                    <td>${dataBarang[i].jumlah + ' biji'}</td>
+                    <td>${formatter.format(dataBarang[i].hargaSatuan)}</td>
+                    <td>
+                        <a href="#edit-modal" class="action-buttons-edit modal-trigger" onclick="EditBarang(this.parentNode.parentNode.children[0].innerText - 1)">
+                            <i class="fa fa-pen-square" style="margin: 2px"></i>
+                        </a>
+                        <a id="delete" href="#delete-modal" class="action-buttons-trash modal-trigger" onclick="Delete(this.parentNode.parentNode.children[0].innerText - 1)">
+                            <i class="fa fa-trash" style="margin: 2px"></i>
+                        </a>
+                    </td>
+                </tr>
+                `;
+            }
+            CreatePagination(pagination);
         }
-        CreatePagination(pagination);
     });
 }
 
 
-// listen to pesan
+// listen to message from main.js
 ipcRenderer.on('pesan', (e, err, message) => {
     errorMessage = err;
     color = message;
@@ -274,18 +303,52 @@ ipcRenderer.on('edited', (e, data) => {
     }
 });
 
-// listen to perubahan data
+// listen to data change
 ipcRenderer.on('stock-data', (e, dataBarang) => {
     dataBarangGlobal = dataBarang;
     let i = dataBarang.length - 1;
-    let index = stockTable.children[stockTable.children.length - 1].children[0].innerText;
-    if (index == i && index%10 != 0){
-        CreatePagination(pagination);
-        PaginationChange(deleteDecrement/10 + 1);
+    if (dataBarang.length == 0){
+        stockTable += /* html */ `
+        <tr>
+            <td>i + 1</td>
+            <td>${dataBarang[i].kode}</td>
+                <td>${dataBarang[i].nama}</td>
+                <td>${dataBarang[i].jumlah + ' biji'}</td>
+                <td>${formatter.format(dataBarang[i].hargaSatuan)}</td>
+                <td>
+                    <a href="#edit-modal" class="action-buttons-edit modal-trigger" onclick="EditBarang(this.parentNode.parentNode.children[0].innerText - 1)">
+                        <i class="fa fa-pen-square" style="margin: 2px"></i>
+                    </a>
+                    <a id="delete" href="#delete-modal" class="action-buttons-trash modal-trigger" onclick="Delete(this.parentNode.parentNode.children[0].innerText - 1)">
+                        <i class="fa fa-trash" style="margin: 2px"></i>
+                    </a>
+                </td>
+            </tr>
+        </tr>
+        `;
     } else {
-        CreatePagination(pagination);
-        PaginationChange(deleteDecrement/10 + 1);
+        if (stockTable.children[stockTable.children.length - 1].children[0].innerText == dataBarang.length - 1 && stockTable.children.length%10 != 0){
+            stockTable.innerHTML += /* html */ `
+            <tr>
+                <td>${i + 1}</td>
+                <td>${dataBarang[i].kode}</td>
+                    <td>${dataBarang[i].nama}</td>
+                    <td>${dataBarang[i].jumlah + ' biji'}</td>
+                    <td>${formatter.format(dataBarang[i].hargaSatuan)}</td>
+                    <td>
+                        <a href="#edit-modal" class="action-buttons-edit modal-trigger" onclick="EditBarang(this.parentNode.parentNode.children[0].innerText - 1)">
+                            <i class="fa fa-pen-square" style="margin: 2px"></i>
+                        </a>
+                        <a id="delete" href="#delete-modal" class="action-buttons-trash modal-trigger" onclick="Delete(this.parentNode.parentNode.children[0].innerText - 1)">
+                            <i class="fa fa-trash" style="margin: 2px"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tr>
+            `;
+        }
     }
+    CreatePagination(pagination);
 });
 
 function submitBarang(e){
