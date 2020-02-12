@@ -10,17 +10,19 @@
     <script src="./styles/js/materialize.js"></script>
     <title>Cash It Here</title>
 </head>
-<body bgcolor="#f1f1f1">
+<body>
   <header>
-    <nav class="indigo">
-      <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="fa fa-bars"></i></a>
-      <div class="nav-wrapper">
-        <a href="#" class="brand-logo" style="margin-left: 20px"><span class="fa fa-store-alt" style="margin-right: 10px"></span>STORE DASHBOARD</a>
-        <div class="right" style="margin-right: 20px;">
-          <a href="#!" class="dropdown-trigger" data-target="user-dropdown"><i class="fa fa-user-circle"></i></a>
+    <div class="navbar-fixed" style="z-index: 999999;">
+      <nav class="indigo fixed">
+        <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="fa fa-bars"></i></a>
+        <div class="nav-wrapper">
+          <a href="#" class="brand-logo" style="margin-left: 20px"><span class="fa fa-store-alt" style="margin-right: 10px"></span>STORE DASHBOARD</a>
+          <div class="right" style="margin-right: 20px;">
+            <a href="#!" class="dropdown-trigger" data-target="user-dropdown"><i class="fa fa-user-circle"></i></a>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </div>
 
     <!-- dropdown structure -->
     <ul class="dropdown-content" id="user-dropdown">
@@ -28,8 +30,9 @@
       <li class="divider" tabindex="-1"></li>
       <li><a href="login.html" class="red-text">Logout <i class="fa fa-user-lock" style="font-size: 15px; margin-right: 0px;"></i></a></li>
     </ul>
+    
     <ul id="slide-out" class="sidenav sidenav-fixed indigo darken-1">
-      <li class="active">
+      <li class="active" style="margin-top: 70px;">
         <a href="#" class="waves-effect" onclick="PageChange(0)">
           <i class="fa fa-home fa-1x" style="font-size: 20px;"></i>
            Dashboard version 1.0
@@ -53,20 +56,28 @@
   <main>
     <div class="row">
       <div id="main-card" class="col s12">
-        <div class="card">
-          <div class="card-content center-align">
-            <h4 class="blue-text">WELCOME TO DASHBOARD</h4>
+        <div class="card center-align" style="width: 700px; margin: auto !important;">
+          <div class="card-content">
+            <div class="card-title">
+              <h4>WELCOME TO DASHBOARD</h4>
+            </div>
           </div>
         </div>
-        <div class="card amber darken-2 col s4 hoverable">
-          <div class="card-header">
-            <h4>The Header</h4>
-          </div>
-          <div class="card-content">
-            <p>loerm ipsum</p>
-          </div>
-          <div class="card-action blue">
-            <p>This is the card action</p>
+        <div class="col s3" style="margin-top: 30px;">
+          <div class="card">
+            <div class="card-content">
+              <div class="card-title">
+                <div class="right right-align">
+                  <p>Last 24 hour</p>
+                  <h4 style="margin-top: 0px;">$300.000</h4>
+                </div>
+                <div>
+                  <a href="#!" class="btn-floating btn-large blue lighten-1">
+                    <i class="fa fa-dollar-sign" style="line-height: 55px;"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

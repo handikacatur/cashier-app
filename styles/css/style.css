@@ -1,11 +1,8 @@
-/* html, body{
-    height: 100%;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-} */
+body {
+    background-color: rgb(226, 226, 255);
+}
 
-header, main {
+main {
     padding-left: 80px;
 }
 
@@ -34,14 +31,17 @@ header, main {
     width: 85vw;
 }
 
-.card {
-    border-radius: 25px;
+.card, .card-action {
+    border-radius: 10px;
 }
 
-.card-title {
-    font-size: 40px !important;
-    font-style: bold;
-    padding-bottom: 20px;
+.card-header {
+    padding: 15px;
+    height: 100px;
+}
+
+.card-header > i {
+    font-size: 30px;
 }
 
 .sidenav {
@@ -68,8 +68,4 @@ header, main {
 
 .active > a, .active a > i {
     color: white !important;
-}
-
-.card-image {
-    padding: 0px;
 }
