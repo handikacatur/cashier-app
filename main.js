@@ -4,7 +4,7 @@ const path = require('path');
 const fs = require('fs');
 
 const {app, BrowserWindow, Menu, ipcMain} = electron;
-// require('electron-reload')(__dirname);
+require('electron-reload')(__dirname);
 
 let mainWindow;
 const userDataJSON = './data/userData.json';
@@ -33,7 +33,7 @@ app.on('ready', () => {
     //Load the main window
     if (fs.existsSync(userDataJSON)){
         mainWindow.loadURL(url.format({
-            pathname: path.join(__dirname, 'admin.html'),
+            pathname: path.join(__dirname, 'cashier.html'),
             protocol: 'file',
             slashes: true
         }));
@@ -58,7 +58,6 @@ app.on('ready', () => {
     // if dataBarang.json exist, update dataBarang array
     if (fs.existsSync(dataBarangJSON)){
         dataBarang = require(dataBarangJSON);
-
         // if web contents is fully loaded, send the dataBarang
         mainWindow.webContents.on('did-finish-load', () => {
             mainWindow.webContents.send('warehouse-data', dataBarang);

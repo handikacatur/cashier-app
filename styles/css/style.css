@@ -17,6 +17,55 @@ main {
     }
 } 
 
+.search-field {
+    width: 250px;
+    height: 35px;
+    font-weight: 600;
+    padding: 10px 10px 10px 20px;
+    border: 0;
+    border-radius: 5px 0px 0px 5px;
+    color: rgb(87, 87, 87);
+    background-color: rgb(245, 245, 245);
+    transition: all .3s ease;
+}
+
+.search-field::placeholder {
+    color: rgb(133, 133, 133);
+}
+
+.search-field:focus {
+    outline: none;
+}
+
+.search-icon {
+    width: 30px;
+    height: 35px;
+    border-radius: 0 5px 5px 0;
+    background-color: rgb(245, 245, 245);
+    transition: all .3s ease;
+}
+
+.search-field:hover {
+    background-color: rgb(209, 209, 209)
+}
+
+.search-field:hover ~ .search-icon {
+    background-color: rgb(209, 209, 209);
+}
+
+.search-field:focus {
+    background-color: rgb(209, 209, 209);
+    width: 900px;
+    height: 50px;
+}
+
+.search-field:focus ~ .search-icon {
+    width: 50px;
+    height: 50px;
+    color: rgb(87, 87, 87);
+    background-color: rgb(209, 209, 209);
+}
+
 #kuantitas {
     display: none;
 }
@@ -31,17 +80,13 @@ main {
     width: 85vw;
 }
 
-.card, .card-action {
+.card {
     border-radius: 10px;
+    transition: all 0.3s ease;
 }
 
-.card-header {
-    padding: 15px;
-    height: 100px;
-}
-
-.card-header > i {
-    font-size: 30px;
+.card-action {
+    border-radius: 25px;
 }
 
 .sidenav {
@@ -62,7 +107,7 @@ main {
     display: none;
 }
 
-.active {
+.sidenav > li.active {
     border-left: 5px solid white;
 }
 
@@ -75,4 +120,24 @@ main {
     width: 100px;
     border-radius: 50%;
     /* margin-left: 50px; */
+}
+
+#search-result {
+    width: 90%;
+    position: absolute;
+    top: 2;
+    margin-top: -20px;
+    animation: fadeIn .3s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        transform: translateY(200px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }

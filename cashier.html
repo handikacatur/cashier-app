@@ -1,23 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./styles/css/materialize.css">
+    <link rel="stylesheet" href="./styles/css/style.css">
+    <link rel="stylesheet" href="./styles/css/all.css">
+    <script src="./styles/js/materialize.js"></script>
     <title>Cash It Here</title>
 </head>
 <body>
-    <form>
-        <label for="kode-barang">Kode Barang: </label>
-        <input type="text" id="kode-barang">
-        <label for="jumlah">Jumlah: </label>
-        <input type="text" id="total">
-        <label for="total">Total: </label>
-        <p>Rp. 6000</p>
-        <label for="jumlah-uang">Jumlah Uang: </label>
-        <input type="text" id="jumlah-uang">
-        <label for="kembalian">Kembalian: </label>
-        <p>Rp. 9000</p>
-    </form>
+    <div class="navbar-fixed" style="z-index: 999999;">
+        <nav class="indigo fixed">
+          <div class="nav-wrapper">
+            <a href="#" class="brand-logo" style="margin-left: 20px"><span class="fa fa-cash-register" style="margin-right: 10px"></span>CASHIER DASHBOARD</a>
+            <div class="right" style="margin-right: 20px;">
+              <a href="#!" class="dropdown-trigger" data-target="user-dropdown"><i class="fa fa-user-circle"></i></a>
+            </div>
+          </div>
+        </nav>
+    </div>
+
+      <!-- dropdown structure -->
+    <ul class="dropdown-content" id="user-dropdown">
+        <li><a href="#!">Settings <i class="fa fa-cog" style="font-size: 15px; margin-right: 0px;"></i></a></li>
+        <li class="divider" tabindex="-1"></li>
+        <li><a href="login.html" class="red-text">Logout <i class="fa fa-user-lock" style="font-size: 15px; margin-right: 0px;"></i></a></li>
+    </ul>
+
+    <div class="row">
+        <div class="cashier-card col s8">
+            <div id="search-card" class="card">
+                <div class="card-content" style="padding-top: 30px;">
+                    <div class="row">
+                        <form id="search-field" class="browser-default col s12 valign-wrapper">
+                            <input id="search-input" type="text" class="browser-default search-field" placeholder="Cari Kode/Nama Barang">
+                            <label for="search-input" class="search-icon valign-wrapper"><i class="fa fa-search" style="font-size: 20px;"></i></label>
+                        </form>
+                    </div>
+                    <div id="search-result"></div>
+                </div>
+            </div>
+        </div>
+        <div class="cashier-card col s4">
+            <div class="card">
+                <div class="card-content">
+                    <p>lorem ipsum</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
-<script>
-    require('./incomeOutcomeSystem');
-</script>
+<script src="systemController/incomeOutcomeSystem.js"></script>
 </html>
